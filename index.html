@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BO-TRON3000</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <style>
+        /* Variáveis de cores para facilitar a alteração */
+        :root {
+            --cor-fundo-1: #fce4ec; /* Rosa bem claro */
+            --cor-fundo-2: #f8bbd0; /* Rosa um pouco mais escuro */
+            --cor-cartao: #ffffff;
+            --cor-texto-titulo: #880e4f; /* Vinho/Bordô elegante */
+            --cor-texto-corpo: #424242;
+            --cor-detalhe: #d81b60;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            /* Fundo com gradiente suave */
+            background: linear-gradient(135deg, var(--cor-fundo-1) 0%, var(--cor-fundo-2) 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--cor-texto-corpo);
+        }
+
+        .cartao-container {
+            background-color: var(--cor-cartao);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(136, 14, 79, 0.15);
+            overflow: hidden;
+            padding: 50px 30px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cor-texto-titulo);
+            font-size: 2.8rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header p.subtitulo {
+            font-style: italic;
+            color: var(--cor-detalhe);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .foto-destaque {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            margin: 0 auto 30px auto;
+            display: block;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            /* Caso não tenha a foto ainda, este fundo cinza aparecerá */
+            background-color: #f5f5f5;
+            min-height: 250px; 
+            object-fit: cover;
+        }
+
+        .mensagem {
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.15rem;
+        }
+
+        .mensagem p {
+            margin-bottom: 20px;
+        }
+
+        .assinatura {
+            margin-top: 40px;
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--cor-texto-titulo);
+            font-style: italic;
+        }
+
+        /* Ajustes para telas menores (Celulares) */
+        @media (max-width: 480px) {
+            .cartao-container {
+                padding: 30px 20px;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .mensagem {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cartao-container">
+        <header>
+            <h1>BO-TRON3000</h1>
+            <p class="subtitulo">Projetado no Sírio-Libanês</p>
+        </header>
+
+        <main>
+            <img src="sua-foto-aqui.jpg" alt="Uma foto nossa especial" class="foto-destaque" onerror="this.style.display='none'">
+              <model-viewer 
+  		  src="eevee.glb" 
+  		  alt="Um modelo 3D especial" 
+   		 auto-rotate 
+    		camera-controls 
+   		 style="width: 100%; height: 300px; background-color: #fce4ec; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+	     </model-viewer>  
+
+            <div class="mensagem">
+                <p>Meu amor,</p>
+                
+                <p>Preparei esta página para guardar um pouquinho da nossa história e te desejar um feliz dia dos namorados. Eu poderia escrever uma carta comum, mas achei que você merecia algo feito sob medida.</p>
+                
+                <p>Estou ansioso para comemorarmos hoje. Já estou até planejando o jantar que vou cozinhar para nós (prometo um cardápio incrível, 100% livre de carne e, claro, passando bem longe do gengibre e do missô, exatamente do jeito que você gosta!).</p>
+                
+                <p>Obrigado por ser minha parceira e por todos os momentos maravilhosos que dividimos.</p>
+                
+            
+               
+                <div class="assinatura">
+                    muati bo,<br>
+                    Bo 1
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
