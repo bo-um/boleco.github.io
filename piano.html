@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Piano bo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --cor-cartao: #ffffff;
+            --cor-texto-titulo: #880e4f;
+            --cor-detalhe: #d81b60;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('pkiss.jpeg'); 
+            background-repeat: repeat; 
+            background-attachment: fixed;
+            background-size: 300px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            user-select: none; /* Evita selecionar texto ao tocar rápido no celular */
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); 
+            z-index: 1; 
+        }
+
+        .container-piano {
+            position: relative;
+            z-index: 2;
+            background-color: var(--cor-cartao);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 900px;
+            width: 95%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cor-texto-titulo);
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        /* --- ESTRUTURA DO PIANO --- */
+        .piano {
+            display: flex;
+            position: relative;
+            /* O max-content força o contêiner a ter o tamanho exato das teclas */
+            width: max-content; 
+            margin: 0 auto 30px auto;
+            height: 250px;
+        }
+
+        .tecla {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 15px;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: sans-serif;
+            font-size: 0.9rem;
+            transition: background-color 0.1s;
+        }
+
+        .tecla-branca {
+            width: 60px;
+            height: 100%;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            color: #333;
+            z-index: 1;
+            box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+        }
+
+        .tecla-branca.ativa {
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 2px rgba(0,0,0,0.2);
+            transform: translateY(2px);
+        }
+
+        .tecla-preta {
+            width: 40px;
+            height: 60%;
+            background-color: #333;
+            color: #fff;
+            position: absolute;
+            z-index: 2;
+            border: 1px solid #000;
+            margin-left: -20px; /* Puxa a tecla preta para o meio das brancas */
+            box-shadow: 0 3px 5px rgba(0,0,0,0.4);
+        }
+
+        .tecla-preta.ativa {
+            background-color: var(--cor-detalhe);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            transform: translateY(2px);
+        }
+
+        .instrucao {
+            color: #757575;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .botao-voltar {
+            display: inline-block;
+            background-color: var(--cor-detalhe);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .botao-voltar:hover {
+            background-color: var(--cor-texto-titulo);
+            transform: scale(1.05);
+        }
+
+        /* Ajustes para telas pequenas (Mobile) */
+        @media (max-width: 600px) {
+            .tecla-branca { width: 45px; }
+            .tecla-preta { width: 30px; margin-left: -15px; }
+            .tecla span { display: none; } /* Esconde as letras no celular */
+            .piano { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-piano">
+        <h1>piano bo</h1>
+        <p class="instrucao">Use o mouse, toque na tela ou use as teclas do teclado (A, W, S, E...)</p>
+
+       <div class="piano" id="piano">
+            <div class="tecla tecla-branca" data-nota="261.63" data-tecla="a"><span>A</span></div>
+            <div class="tecla tecla-preta" data-nota="277.18" data-tecla="w" style="left: 12.5%;"><span>W</span></div>
+            
+            <div class="tecla tecla-branca" data-nota="293.66" data-tecla="s"><span>S</span></div>
+            <div class="tecla tecla-preta" data-nota="311.13" data-tecla="e" style="left: 25%;"><span>E</span></div>
+            
+            <div class="tecla tecla-branca" data-nota="329.63" data-tecla="d"><span>D</span></div>
+            <div class="tecla tecla-branca" data-nota="349.23" data-tecla="f"><span>F</span></div>
+            <div class="tecla tecla-preta" data-nota="369.99" data-tecla="t" style="left: 50%;"><span>T</span></div>
+            
+            <div class="tecla tecla-branca" data-nota="392.00" data-tecla="g"><span>G</span></div>
+            <div class="tecla tecla-preta" data-nota="415.30" data-tecla="y" style="left: 62.5%;"><span>Y</span></div>
+            
+            <div class="tecla tecla-branca" data-nota="440.00" data-tecla="h"><span>H</span></div>
+            <div class="tecla tecla-preta" data-nota="466.16" data-tecla="u" style="left: 75%;"><span>U</span></div>
+            
+            <div class="tecla tecla-branca" data-nota="493.88" data-tecla="j"><span>J</span></div>
+            <div class="tecla tecla-branca" data-nota="523.25" data-tecla="k"><span>K</span></div>
+        </div>
+
+        <a href="index.html" class="botao-voltar">Voltar</a>
+    </div>
+
+    <script>
+        // Configuração do Sintetizador de Áudio
+        let audioContext;
+
+        function iniciarAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function tocarNota(frequencia) {
+            iniciarAudio();
+            
+            // Cria os nós de áudio
+            const oscilador = audioContext.createOscillator();
+            const ganho = audioContext.createGain();
+
+            // Configura o som para parecer um pouco com um piano/teclado elétrico (onda triangle)
+            oscilador.type = 'triangle';
+            oscilador.frequency.setValueAtTime(frequencia, audioContext.currentTime);
+
+            // Simula a batida e o decaimento natural do som da tecla
+            ganho.gain.setValueAtTime(1, audioContext.currentTime);
+            ganho.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1.5);
+
+            // Conecta e toca
+            oscilador.connect(ganho);
+            ganho.connect(audioContext.destination);
+            oscilador.start();
+            oscilador.stop(audioContext.currentTime + 1.5);
+        }
+
+        // --- SISTEMA DE INTERAÇÃO (TOQUE, MOUSE E TECLADO) ---
+        const teclas = document.querySelectorAll('.tecla');
+
+        // Função que acende a tecla e chama o som
+        function ativarTecla(elemento) {
+            if (!elemento.classList.contains('ativa')) {
+                elemento.classList.add('ativa');
+                const frequencia = parseFloat(elemento.getAttribute('data-nota'));
+                tocarNota(frequencia);
+            }
+        }
+
+        function desativarTecla(elemento) {
+            elemento.classList.remove('ativa');
+        }
+
+        // Para Mouse e Toque no celular (Pointer Events lidam com os dois perfeitamente)
+        teclas.forEach(tecla => {
+            tecla.addEventListener('pointerdown', (e) => {
+                e.preventDefault(); // Impede comportamentos estranhos de zoom no mobile
+                ativarTecla(tecla);
+            });
+            tecla.addEventListener('pointerup', () => desativarTecla(tecla));
+            tecla.addEventListener('pointerleave', () => desativarTecla(tecla));
+        });
+
+        // Para o Teclado do Computador
+        document.addEventListener('keydown', (e) => {
+            if (e.repeat) return; // Impede que o som trave se segurar a tecla
+            const teclaPressionada = e.key.toLowerCase();
+            const elementoTecla = document.querySelector(`.tecla[data-tecla="${teclaPressionada}"]`);
+            
+            if (elementoTecla) {
+                ativarTecla(elementoTecla);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const teclaPressionada = e.key.toLowerCase();
+            const elementoTecla = document.querySelector(`.tecla[data-tecla="${teclaPressionada}"]`);
+            
+            if (elementoTecla) {
+                desativarTecla(elementoTecla);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Potemon</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <style>
+        :root {
+            --cor-cartao: #ffffff;
+            --cor-texto-titulo: #880e4f;
+            --cor-texto-corpo: #424242;
+            --cor-detalhe: #d81b60;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: var(--cor-texto-corpo);
+            position: relative; 
+            
+            /* Fundo de Mangá */
+            background-image: url('wha1.jpeg'); 
+            background-repeat: repeat; 
+            background-attachment: fixed;
+            background-size: 350px; 
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); 
+            z-index: 1; 
+        }
+
+        .cartao-container {
+            position: relative; 
+            z-index: 2;
+            background-color: var(--cor-cartao);
+            max-width: 900px; 
+            width: 95%; 
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            margin: 40px auto; 
+            display: block;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cor-texto-titulo);
+            font-size: 2.5rem;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+      /* --- LISTA DA GALERIA 3D (Um embaixo do outro) --- */
+        .galeria-grid {
+            display: flex;
+            flex-direction: column; /* Força os cartões a ficarem em uma única coluna vertical */
+            align-items: center;    /* Centraliza os cartões na tela */
+            gap: 40px;              /* Espaço maior (40px) entre um Pokémon e outro */
+            margin-bottom: 40px;
+        }
+
+        .pokemon-card {
+            background-color: #fff0f5;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #f8bbd0;
+            width: 100%;
+            max-width: 500px; /* Impede que o cartão fique gigante no PC */
+            box-sizing: border-box;
+        }
+
+        /* ... (O h3 continua igual) ... */
+
+        model-viewer {
+            width: 100%;
+            height: 350px; /* Altura aumentada para dar mais espaço ao modelo */
+            background-color: transparent;
+            outline: none;
+        }
+
+        .pokemon-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--cor-texto-titulo);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 250px;
+            background-color: transparent;
+            outline: none;
+        }
+
+        /* Botão para voltar */
+        .botao-voltar {
+            display: inline-block;
+            background-color: var(--cor-detalhe);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .botao-voltar:hover {
+            background-color: var(--cor-texto-titulo);
+            transform: scale(1.05);
+        }
+
+ /* --- ESTILO DO PLAYER DE MÚSICA PERSONALIZADO --- */
+        .player-bonitinho {
+            background-color: #fff0f5; /* Um rosa bem clarinho */
+            border: 1px solid #f8bbd0;
+            border-radius: 16px;
+            padding: 15px 20px;
+            margin: 0 auto 30px auto;
+            max-width: 100%;
+            box-shadow: 0 4px 15px rgba(136, 14, 79, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .player-icone {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--cor-detalhe), var(--cor-texto-titulo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .player-textos {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .player-titulo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--cor-texto-titulo);
+        }
+
+        .player-subtitulo {
+            font-size: 0.85rem;
+            color: #757575;
+            font-style: italic;
+        }
+
+        .player-controles {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-play {
+            background-color: var(--cor-detalhe);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            padding-left: 4px; /* Centraliza o ícone de play visualmente */
+        }
+
+        .btn-play.tocando {
+            padding-left: 0; /* Centraliza o ícone de pause */
+        }
+
+        .btn-play:hover {
+            transform: scale(1.1);
+            background-color: var(--cor-texto-titulo);
+        }
+
+        .barra-progresso-fundo {
+            flex-grow: 1;
+            height: 6px;
+            background-color: #fce4ec;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .barra-progresso-preenchida {
+            height: 100%;
+            width: 0%;
+            background-color: var(--cor-detalhe);
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        .tempo-musica {
+            font-size: 0.8rem;
+            color: var(--cor-texto-corpo);
+            font-family: monospace;
+            min-width: 40px;
+            text-align: right;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="cartao-container">
+    
+        <header>
+            <h1>potemons do bo</h1>
+        </header>
+
+        <main>
+         <div class="player-bonitinho">
+                <audio id="musicaLocal" src="gotu1.mp3"></audio>
+                
+                <div class="player-info">
+                    <div class="player-icone">🎵</div>
+                    <div class="player-textos">
+                        <div class="player-titulo">Ninguem mais feliz</div>
+                        <div class="player-subtitulo">que eu e meu bo...</div>
+                    </div>
+                </div>
+
+                <div class="player-controles">
+                    <button id="btnPlay" class="btn-play">▶</button>
+                    <div class="barra-progresso-fundo" id="barraFundo">
+                        <div class="barra-progresso-preenchida" id="barraProgresso"></div>
+                    </div>
+                    <div class="tempo-musica" id="tempoMusica">0:00</div>
+                </div>
+            </div>
+            <div class="galeria-grid">
+                
+                <div class="pokemon-card">
+                    <h3>Eevee</h3>
+                    <model-viewer src="eevee.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+
+                <div class="pokemon-card">
+                    <h3>Bulbasauro</h3>
+                    <model-viewer src="bulbasaur.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+
+                <div class="pokemon-card">
+                    <h3>Fidough</h3>
+                    <model-viewer src="fidough.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Rowlet</h3>
+                    <model-viewer src="rowlet.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Espurr</h3>
+                    <model-viewer src="espurr.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Jirachi</h3>
+                    <model-viewer src="jirachi.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Mew</h3>
+                    <model-viewer src="mew.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Leafeon</h3>
+                    <model-viewer src="leafeon.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Espeon</h3>
+                    <model-viewer src="espeon.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Sylveon</h3>
+                    <model-viewer src="sylveon.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+                
+                <div class="pokemon-card">
+                    <h3>Glaceon</h3>
+                    <model-viewer src="glaceon.glb" auto-rotate camera-controls></model-viewer>
+                </div>
+
+            </div>
+
+            <a href="index.html" class="botao-voltar">Voltar</a>
+        </main>
+    </div>
+<script>
+        const audio = document.getElementById('musicaLocal');
+        const btnPlay = document.getElementById('btnPlay');
+        const barraProgresso = document.getElementById('barraProgresso');
+        const barraFundo = document.getElementById('barraFundo');
+        const tempoMusica = document.getElementById('tempoMusica');
+
+        // Alternar entre Play e Pause
+        btnPlay.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                btnPlay.innerHTML = '⏸'; // Muda para ícone de pause
+                btnPlay.classList.add('tocando');
+            } else {
+                audio.pause();
+                btnPlay.innerHTML = '▶'; // Muda para ícone de play
+                btnPlay.classList.remove('tocando');
+            }
+        });
+
+        // Atualizar a barra de progresso e o tempo enquanto a música toca
+        audio.addEventListener('timeupdate', () => {
+            const progresso = (audio.currentTime / audio.duration) * 100;
+            barraProgresso.style.width = `${progresso}%`;
+
+            // Formatar o tempo (minutos:segundos)
+            let minutos = Math.floor(audio.currentTime / 60);
+            let segundos = Math.floor(audio.currentTime % 60);
+            if (segundos < 10) segundos = `0${segundos}`;
+            tempoMusica.textContent = `${minutos}:${segundos}`;
+        });
+
+        // Permitir clicar na barra para pular para uma parte da música
+        barraFundo.addEventListener('click', (e) => {
+            const larguraTotal = barraFundo.clientWidth;
+            const cliqueX = e.offsetX;
+            const novaPosicao = (cliqueX / larguraTotal) * audio.duration;
+            audio.currentTime = novaPosicao;
+        });
+    </script>
+</body>
+</html>
